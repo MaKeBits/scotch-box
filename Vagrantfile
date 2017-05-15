@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.box = "scotch/box"
     config.vm.define "scotchbox"
-    config.vm.network "private_network", id: "modxbox_primary", ip: "192.168.33.10"
+    config.vm.network :private_network, id: "modxbox_primary", ip: "192.168.33.10"
     config.vm.hostname = hostname
 
     config.vm.provider "virtualbox" do |vb|
@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
     end
 
 
-    config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=666"]
+    config.vm.synced_folder ".", "/var/www", :nfs => { :mount_options => ["dmode=777", "fmode=666"] }
 
     # Optional NFS. Make sure to remove other synced_folder line too
     #config.vm.synced_folder ".", "/var/www", :nfs => { :mount_options => ["dmode=777","fmode=666"] }
